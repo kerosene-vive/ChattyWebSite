@@ -36,9 +36,7 @@
     const colors = ref([
         'green',
         'secondary',
-        'yellow darken-4',
-        'red lighten-2',
-        'orange darken-1'
+        'yellow darken-4'
     ]);
     const slides = ref([
         'Automazione delle vendite',

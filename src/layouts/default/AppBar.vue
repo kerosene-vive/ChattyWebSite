@@ -35,10 +35,11 @@
 </template>
 
 <script setup>
+  import { ref } from 'vue';
+  import utils from '@/utils/utils';
   import { useRouter } from 'vue-router';
-  import { ref, onMounted, onBeforeUnmount } from 'vue';
 
-  const isMobile = ref(false);
+  const { isMobile } = utils.setupMobileUtils();
   const drawer = ref(null);
   const items = ref([
     {
@@ -58,18 +59,6 @@
       hash: 'prezziSection'
     }
   ]);
-
-  const checkMobile = () => {
-    isMobile.value = window.innerWidth < 600;
-  };
-
-  onMounted(() => {
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-  });
-  onBeforeUnmount(() => {
-    window.removeEventListener('resize', checkMobile);
-  });
 
   const router = useRouter();
   const link = (hash) => {

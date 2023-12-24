@@ -17,11 +17,11 @@
                             <v-list density="compact">
                                 <v-list-subheader>FEATURES</v-list-subheader>
                                 <v-list-item v-for="(item, j) in price.features" :key="j">
-                                    <template v-slot:prepend>
+                                    <template v-slot:prepend v-if="!isMobile">
                                         <v-icon :icon="item.icon"></v-icon>
                                     </template>
                                     <v-list-item-title color="primary">
-                                    {{ item.text }}
+                                        {{ item.text }}
                                     </v-list-item-title>
                                 </v-list-item>
                             </v-list>
@@ -36,67 +36,69 @@
 
 <script setup>
     import { ref } from 'vue';
+    import utils from '@/utils/utils';
 
+    const { isMobile } = utils.setupMobileUtils();
     const prices = ref([
         {
-            "name": "Basic",
-            "value": 15,
-            "features": [
+            name: "Basic",
+            value: 15,
+            features: [
                 {
-                    "icon": "mdi-numeric-1-circle",
-                    "text": "Un chat-bot personalizzato"
+                    icon: "mdi-numeric-1-circle",
+                    text: "Un chat-bot personalizzato"
                 },
                 {
-                    "icon": "mdi-check-underline-circle",
-                    "text": "Acquisizione di contatti"
+                    icon: "mdi-check-underline-circle",
+                    text: "Acquisizione di contatti"
                 },
                 {
-                    "icon": "mdi-check-underline-circle",
-                    "text": "Prenotazione di appuntamenti"
+                    icon: "mdi-check-underline-circle",
+                    text: "Prenotazione di appuntamenti"
                 }
             ]
         },
         {
-            "name": "Premium",
-            "value": 30,
-            "features": [
+            name: "Premium",
+            value: 30,
+            features: [
                 {
-                    "icon": "mdi-numeric-1-circle",
-                    "text": "Un chat-bot personalizzato"
+                    icon: "mdi-numeric-1-circle",
+                    text: "Un chat-bot personalizzato"
                 },
                 {
-                    "icon": "mdi-check-underline-circle",
-                    "text": "Acquisizione di contatti"
+                    icon: "mdi-check-underline-circle",
+                    text: "Acquisizione di contatti"
                 },
                 {
-                    "icon": "mdi-check-underline-circle",
-                    "text": "Prenotazione di appuntamenti"
+                    icon: "mdi-check-underline-circle",
+                    text: "Prenotazione di appuntamenti"
                 },
                 {
-                    "icon": "mdi-check-underline-circle",
-                    "text": "Automazione delle vendite"
+                    icon: "mdi-check-underline-circle",
+                    text: "Automazione delle vendite"
                 }
             ]
         },
         {
-            "name": "Enterprise",
-            "value": 50,
-            "features": [
+            name: "Enterprise",
+            value: 50,
+            features: [
                 {
-                    "icon": "mdi-numeric-3-circle",
-                    "text": "Tre chat-bot personalizzati"
+                    icon: "mdi-numeric-3-circle",
+                    text: "Tre chat-bot personalizzati"
                 },
                 {
-                    "icon": "mdi-check-underline-circle",
-                    "text": "Acquisizione di contatti"
+                    icon: "mdi-check-underline-circle",
+                    text: "Acquisizione di contatti"
                 },
                 {
-                    "icon": "mdi-check-underline-circle",
-                    "text": "Prenotazione di appuntamenti"
+                    icon: "mdi-check-underline-circle",
+                    text: "Prenotazione di appuntamenti"
                 },
                 {
-                    "icon": "mdi-check-underline-circle",
-                    "text": "Automazione delle vendite"
+                    icon: "mdi-check-underline-circle",
+                    text: "Automazione delle vendite"
                 }
             ]
         }
@@ -109,7 +111,7 @@
             white-space: normal;
         }
         .d-flex.align-center {
-            min-height: 275px;
+            min-height: 250px;
         }
     }
 </style>
