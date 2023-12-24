@@ -9,10 +9,9 @@
         v-for="(item, i) in items"
         :key="i"
         :value="item"
+        @click="link(item.hash)"
       >
-        <router-link :to="{ name: 'Home', hash: `#${item.hash}` }">
-          {{ item.title }}
-        </router-link>
+        {{ item.title }}
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
@@ -28,16 +27,15 @@
       v-for="(item, index) in items"
       :key="index"
     >
-      <v-btn variant="text">
-        <router-link :to="{ name: 'Home', hash: `#${item.hash}` }">
-          {{ item.title }}
-        </router-link>
+      <v-btn variant="text" @click="link(item.hash)">
+        {{ item.title }}
       </v-btn>
     </div>
   </v-app-bar>
 </template>
 
 <script setup>
+  import { useRouter } from 'vue-router';
   import { ref, onMounted, onBeforeUnmount } from 'vue';
 
   const isMobile = ref(false);
@@ -72,6 +70,11 @@
   onBeforeUnmount(() => {
     window.removeEventListener('resize', checkMobile);
   });
+
+  const router = useRouter();
+  const link = (hash) => {
+    router.push(`/#${hash}`);
+  }
 </script>
 
 <style scoped>
