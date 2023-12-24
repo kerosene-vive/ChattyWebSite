@@ -3,7 +3,7 @@
         <h2>Prova il tuo Chatty</h2>
         <h4>
             Hai già richiesto la creazione del tuo bot personalizzato?<br>
-            Inserisci qui il codice ricevuto tramite mail per usare in esclusiva il chat-bot
+            Inserisci qui il codice ricevuto tramite mail per usare in esclusiva il chat-bot.
         </h4><br>
         <v-form fast-fail @submit.prevent="tryBot">
             <v-row>
@@ -38,7 +38,8 @@
     const router = useRouter();
 
     const tryBot = async () => {
-        if (botId.value)
+        if (botId.value) {
             router.push(`/demo/${botId.value}`);
+        }
     };
 </script>

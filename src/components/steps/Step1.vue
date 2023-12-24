@@ -30,14 +30,7 @@
                     <v-textarea
                         label="Altre informazioni sulla tua azienda"
                         v-model="info"
-                        hint="Più informazioni ci fornirai sulla tua azienda, più il tuo Chatty sarà efficente"
-                    />
-                </v-col>
-            </v-row>
-            <v-row>
-                <v-col cols="12" md="12">
-                    <v-file-input
-                        label="Carica un file che descrive la tua azienda"
+                        rows="2"
                         hint="Più informazioni ci fornirai sulla tua azienda, più il tuo Chatty sarà efficente"
                     />
                 </v-col>
@@ -68,17 +61,60 @@
         (value) => {
             if (/.+@.+\..+/.test(value)) return true;
             return 'E-mail non valida.';
-        },
+        }
     ]);
     const siteRules = requiredRules.concat([
         (value) => {
             if (/^(https?:\/\/)?([\w-]+\.)+([a-z]{2,})+(\/[\w-]*)*(\?[a-z0-9-]+=[a-z0-9-%]+(&[a-z0-9-]+=[a-z0-9-%]+)*)?$/i.test(value))
                 return true;
             return 'Sito non valida.';
-        },
+        }
     ]);
 
+    const validateInput = (value, rules) => {
+        const errors = [];
+        for (const rule of rules) {
+            const result = rule(value);
+            if (result !== true)
+                errors.push(result);
+        }
+        return errors.length === 0 ? null : errors;
+    };
     const askBot = () => {
-        alert("ciao")
-    }
+        if (
+            !validateInput(name.value, requiredRules) &&
+            !validateInput(email.value, emailRules) &&
+            !validateInput(site.value, siteRules)
+        ) {
+            const hostname = import.meta.env.VITE_HOSTNAME;
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    args: {
+                        name: name.value,
+                        email: email.value,
+                        website: site.value,
+                        description: info.value
+                    }
+                })
+            };
+
+            fetch(`${hostname}ask-bot`, requestOptions)
+                .then(response => {
+                    if (!response.ok) {
+                    throw new Error(`Errore nella risposta del server: ${response.status} - ${response.statusText}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Risposta dal server:', data);
+                })
+                .catch(error => {
+                    console.error('Errore nella richiesta:', error);
+                });
+        }
+    };
 </script>
