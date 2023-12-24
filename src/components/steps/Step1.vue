@@ -1,55 +1,54 @@
 <template>
-    <v-card title="Richiedi una demo" flat>
-        <v-sheet width="1000" class="mx-auto">
-            <v-form fast-fail @submit.prevent="askBot">
-                <v-row>
-                    <v-col cols="12" md="4">
-                        <v-text-field
-                            v-model="name"
-                            label="Nome dell'azienda *"
-                            :rules="requiredRules"
-                        />
-                    </v-col>
-                    <v-col cols="12" md="4">
-                        <v-text-field
-                            v-model="email"
-                            label="Email *"
-                            :rules="emailRules"
-                        />
-                    </v-col>
-                    <v-col cols="12" md="4">
-                        <v-text-field
-                            v-model="site"
-                            label="Sito web *"
-                            :rules="siteRules"
-                        />
-                    </v-col>
-                </v-row>
-                <v-row>
-                    <v-col cols="12" md="12">
-                        <v-textarea
-                            label="Altre informazioni sulla tua azienda"
-                            v-model="info"
-                            hint="Più informazioni ci fornirai sulla tua azienda, più il tuo Chatty sarà efficente"
-                        />
-                    </v-col>
-                </v-row>
-                <v-row>
-                    <v-col cols="12" md="12">
-                        <v-file-input
-                            label="Carica un file che descrive la tua azienda"
-                            hint="Più informazioni ci fornirai sulla tua azienda, più il tuo Chatty sarà efficente"
-                        />
-                    </v-col>
-                </v-row>
-                <v-row>
-                    <v-col cols="12" md="12">
-                        <v-btn variant="tonal" type="submit" block class="mt-2">Richiedi</v-btn>
-                    </v-col>
-                </v-row>
-            </v-form>
-        </v-sheet>
-    </v-card>
+    <v-container class="step-container">
+        <h2>Richiedi una demo gratuita</h2><br>
+        <v-form fast-fail @submit.prevent="askBot">
+            <v-row>
+                <v-col cols="12" md="4">
+                    <v-text-field
+                        v-model="name"
+                        label="Nome dell'azienda *"
+                        :rules="requiredRules"
+                    />
+                </v-col>
+                <v-col cols="12" md="4">
+                    <v-text-field
+                        v-model="email"
+                        label="Email *"
+                        :rules="emailRules"
+                    />
+                </v-col>
+                <v-col cols="12" md="4">
+                    <v-text-field
+                        v-model="site"
+                        label="Sito web *"
+                        :rules="siteRules"
+                    />
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col cols="12" md="12">
+                    <v-textarea
+                        label="Altre informazioni sulla tua azienda"
+                        v-model="info"
+                        hint="Più informazioni ci fornirai sulla tua azienda, più il tuo Chatty sarà efficente"
+                    />
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col cols="12" md="12">
+                    <v-file-input
+                        label="Carica un file che descrive la tua azienda"
+                        hint="Più informazioni ci fornirai sulla tua azienda, più il tuo Chatty sarà efficente"
+                    />
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col cols="12" md="12">
+                    <v-btn variant="tonal" type="submit" block class="mt-2">Richiedi</v-btn>
+                </v-col>
+            </v-row>
+        </v-form>
+    </v-container>
 </template>
 
 <script setup>

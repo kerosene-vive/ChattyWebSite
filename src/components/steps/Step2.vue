@@ -1,34 +1,27 @@
 <template>
-    <v-card title="Prova il tuo Chatty" flat>
-        <v-sheet width="1000" class="mx-auto">
-            <v-form fast-fail @submit.prevent="tryBot">
-                <v-row>
-                    <v-col cols="12" md="12">
-                        <v-text-field
-                            v-model="botId"
-                            label="Bot id"
-                            :rules="requiredRules"
-                        />
-                    </v-col>
-                </v-row>
-                <v-sheet>
-                        <h4>
-                            Hai già richiesto la creazione del tuo bot personalizzato?<br>
-                            Inserisci qui il codice ricevuto tramite mail per usare in esclusiva il chat-bot
-                        </h4>
-                    </v-sheet>
-                <v-row>
-                    <v-col cols="12" md="12">
-                        <v-btn
-                            variant="tonal"
-                            type="submit"
-                            block class="mt-2"
-                        >Prova</v-btn>
-                    </v-col>
-                </v-row>
-            </v-form>
-        </v-sheet>
-    </v-card>
+    <v-container class="step-container">
+        <h2>Prova il tuo Chatty</h2>
+        <h4>
+            Hai già richiesto la creazione del tuo bot personalizzato?<br>
+            Inserisci qui il codice ricevuto tramite mail per usare in esclusiva il chat-bot
+        </h4><br>
+        <v-form fast-fail @submit.prevent="tryBot">
+            <v-row>
+                <v-col cols="12" md="12">
+                    <v-text-field
+                        v-model="botId"
+                        label="Bot id"
+                        :rules="requiredRules"
+                    />
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col cols="12" md="12">
+                    <v-btn variant="tonal" type="submit" block class="mt-2">Prova</v-btn>
+                </v-col>
+            </v-row>
+        </v-form>
+    </v-container>
 </template>
 
 <script setup>

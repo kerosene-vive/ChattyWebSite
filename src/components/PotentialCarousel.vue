@@ -20,7 +20,7 @@
                     >
                         <div class="d-flex fill-height justify-center align-center">
                         <div class="text-h2">
-                            {{ slide }} Slide
+                            {{ slide }}
                         </div>
                         </div>
                     </v-sheet>
@@ -41,10 +41,8 @@
         'orange darken-1'
     ]);
     const slides = ref([
-        'First',
-        'Second',
-        'Third',
-        'Fourth',
-        'Fifth'
+        'Automazione delle vendite',
+        'Acquisizione di contatti',
+        'Prenotazione di appuntamenti'
     ]);
 </script>

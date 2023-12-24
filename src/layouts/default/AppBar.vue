@@ -58,10 +58,6 @@
     {
       title: 'Prezzi',
       hash: 'prezziSection'
-    },
-    {
-      title: 'Chi siamo',
-      hash: 'chiSiamoSection'
     }
   ]);
 
