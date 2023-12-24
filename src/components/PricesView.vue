@@ -4,34 +4,26 @@
         <h3 class="divider-text">Prezzi</h3>
         <v-item-group selected-class="bg-primary">
             <v-row>
-            <v-col
-                v-for="(price, i) in prices"
-                :key="i"
-                cols="12"
-                md="4"
-            >
-                <v-item v-slot="{ isSelected, selectedClass }">
-                    <v-card
-                        :class="['d-flex align-center', selectedClass]"
-                        dark
-                        height="200"
-                        elevation="20"
-                        :title="price.name"
-                    >
+            <v-col v-for="(price, i) in prices" :key="i" cols="12" md="4">
+                <v-item>
+                    <v-card class="d-flex align-center" height="225" elevation="20">
+                        <template v-slot:title>
+                            {{ price.name }}
+                        </template>
                         <template v-slot:subtitle>
                             {{ price.value }},00 €
                         </template>
                         <template v-slot:text>
                             <v-list density="compact">
                                 <v-list-subheader>FEATURES</v-list-subheader>
-                                <template v-for="(item, j) in price.features" :key="j">
-                                    <v-list-item-title :value="item" color="primary">
+                                <v-list-item v-for="(item, j) in price.features" :key="j">
                                     <template v-slot:prepend>
                                         <v-icon :icon="item.icon"></v-icon>
                                     </template>
+                                    <v-list-item-title color="primary">
                                     {{ item.text }}
                                     </v-list-item-title>
-                                </template>
+                                </v-list-item>
                             </v-list>
                         </template>
                     </v-card>
@@ -51,12 +43,16 @@
             "value": 15,
             "features": [
                 {
-                    "icon": "icon",
-                    "text": "text"
+                    "icon": "mdi-numeric-1-circle",
+                    "text": "Un chat-bot personalizzato"
                 },
                 {
-                    "icon": "icon",
-                    "text": "text"
+                    "icon": "mdi-check-underline-circle",
+                    "text": "Acquisizione di contatti"
+                },
+                {
+                    "icon": "mdi-check-underline-circle",
+                    "text": "Prenotazione di appuntamenti"
                 }
             ]
         },
@@ -65,8 +61,20 @@
             "value": 30,
             "features": [
                 {
-                    "icon": "icon",
-                    "text": "text"
+                    "icon": "mdi-numeric-1-circle",
+                    "text": "Un chat-bot personalizzato"
+                },
+                {
+                    "icon": "mdi-check-underline-circle",
+                    "text": "Acquisizione di contatti"
+                },
+                {
+                    "icon": "mdi-check-underline-circle",
+                    "text": "Prenotazione di appuntamenti"
+                },
+                {
+                    "icon": "mdi-check-underline-circle",
+                    "text": "Automazione delle vendite"
                 }
             ]
         },
@@ -75,10 +83,33 @@
             "value": 50,
             "features": [
                 {
-                    "icon": "icon",
-                    "text": "text"
+                    "icon": "mdi-numeric-3-circle",
+                    "text": "Tre chat-bot personalizzati"
+                },
+                {
+                    "icon": "mdi-check-underline-circle",
+                    "text": "Acquisizione di contatti"
+                },
+                {
+                    "icon": "mdi-check-underline-circle",
+                    "text": "Prenotazione di appuntamenti"
+                },
+                {
+                    "icon": "mdi-check-underline-circle",
+                    "text": "Automazione delle vendite"
                 }
             ]
         }
     ])
 </script>
+
+<style scoped>
+    @media only screen and (max-width: 600px) {
+        .v-list-item-title {
+            white-space: normal;
+        }
+        .d-flex.align-center {
+            min-height: 275px;
+        }
+    }
+</style>
