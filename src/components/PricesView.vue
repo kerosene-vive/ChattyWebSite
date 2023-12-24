@@ -111,7 +111,7 @@
             white-space: normal;
         }
         .d-flex.align-center {
-            min-height: 250px;
+            min-height: 275px;
         }
     }
 </style>
