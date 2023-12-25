@@ -6,7 +6,7 @@
                 <h3>Prezzi</h3>
             </v-col>
             <v-col cols="auto">
-                <v-switch :label="switchFlag ? 'Annuale' : 'Mensile'" v-model="switchFlag" class="switch-price"></v-switch>
+                <v-switch :label="switchFlag ? 'Annuale' : 'Mensile'" v-model="switchFlag" class="switch-price" />
             </v-col>
         </v-row>
         <v-alert variant="tonal" elevation="20">
@@ -15,36 +15,36 @@
         <br>
         <v-item-group selected-class="bg-primary">
             <v-row>
-            <v-col v-for="(price, i) in prices" :key="i" cols="12" md="4">
-                <v-item>
-                    <v-card class="d-flex align-center" height="190" elevation="20">
-                        <template v-slot:title>
-                            {{ price.name }}
-                        </template>
-                        <template v-slot:subtitle>
-                            <div>
-                                {{ switchFlag ? price.value.year : price.value.month }},00
-                                €/{{ switchFlag ? 'year' : 'month' }}
-                            </div>
-                            <div v-if="switchFlag">
-                                {{ price.value.yearMonth }} €/month
-                            </div>
-                        </template>
-                        <template v-slot:text>
-                            <v-list density="compact">
-                                <v-list-item v-for="(item, j) in price.features" :key="j">
-                                    <template v-slot:prepend v-if="!isMobile">
-                                        <v-icon :icon="item.icon"></v-icon>
-                                    </template>
-                                    <v-list-item-title color="primary">
-                                        {{ item.text }}
-                                    </v-list-item-title>
-                                </v-list-item>
-                            </v-list>
-                        </template>
-                    </v-card>
-                </v-item>
-            </v-col>
+                <v-col v-for="(price, i) in prices" :key="i" cols="12" md="4">
+                    <v-item>
+                        <v-card class="d-flex align-center" height="190" elevation="20">
+                            <template v-slot:title>
+                                {{ price.name }}
+                            </template>
+                            <template v-slot:subtitle>
+                                <div>
+                                    {{ switchFlag ? price.value.year : price.value.month }},00
+                                    €/{{ switchFlag ? 'year' : 'month' }}
+                                </div>
+                                <div v-if="switchFlag">
+                                    {{ price.value.yearMonth }} €/month
+                                </div>
+                            </template>
+                            <template v-slot:text>
+                                <v-list density="compact">
+                                    <v-list-item v-for="(item, j) in price.features" :key="j">
+                                        <template v-slot:prepend v-if="!isMobile">
+                                            <v-icon :icon="item.icon"></v-icon>
+                                        </template>
+                                        <v-list-item-title color="primary">
+                                            {{ item.text }}
+                                        </v-list-item-title>
+                                    </v-list-item>
+                                </v-list>
+                            </template>
+                        </v-card>
+                    </v-item>
+                </v-col>
             </v-row>
         </v-item-group>
     </v-container>
