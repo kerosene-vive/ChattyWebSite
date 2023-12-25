@@ -6,14 +6,18 @@
                 <h3>Prezzi</h3>
             </v-col>
             <v-col cols="auto">
-                <v-switch :label="switchFlag ? 'Annuale' : 'Mensile'" v-model="switchFlag"></v-switch>
+                <v-switch :label="switchFlag ? 'Annuale' : 'Mensile'" v-model="switchFlag" class="switch-price"></v-switch>
             </v-col>
         </v-row>
+        <v-alert variant="tonal" elevation="20">
+            <i>Nota: Questi prezzi non includono i costi delle API di OpenAI.</i>
+        </v-alert>
+        <br>
         <v-item-group selected-class="bg-primary">
             <v-row>
             <v-col v-for="(price, i) in prices" :key="i" cols="12" md="4">
                 <v-item>
-                    <v-card class="d-flex align-center" height="225" elevation="20">
+                    <v-card class="d-flex align-center" height="190" elevation="20">
                         <template v-slot:title>
                             {{ price.name }}
                         </template>
@@ -28,7 +32,6 @@
                         </template>
                         <template v-slot:text>
                             <v-list density="compact">
-                                <v-list-subheader>FEATURES</v-list-subheader>
                                 <v-list-item v-for="(item, j) in price.features" :key="j">
                                     <template v-slot:prepend v-if="!isMobile">
                                         <v-icon :icon="item.icon"></v-icon>
@@ -137,11 +140,14 @@
             white-space: normal;
         }
         .d-flex.align-center {
-            min-height: 275px;
+            min-height: 240px;
         }
     }
     .divider-price {
         height: 80px;
         margin-top: 20px;
+    }
+    .switch-price {
+        margin-top: -15px;
     }
 </style>
