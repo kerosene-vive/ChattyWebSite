@@ -1,7 +1,14 @@
 <template>
     <v-container>
         <v-divider></v-divider>
-        <h3 class="divider-text">Prezzi</h3>
+        <v-row class="divider-price">
+            <v-col>
+                <h3>Prezzi</h3>
+            </v-col>
+            <v-col cols="auto">
+                <v-switch :label="switchFlag ? 'Annuale' : 'Mensile'" v-model="switchFlag"></v-switch>
+            </v-col>
+        </v-row>
         <v-item-group selected-class="bg-primary">
             <v-row>
             <v-col v-for="(price, i) in prices" :key="i" cols="12" md="4">
@@ -11,7 +18,13 @@
                             {{ price.name }}
                         </template>
                         <template v-slot:subtitle>
-                            {{ price.value }},00 €
+                            <div>
+                                {{ switchFlag ? price.value.year : price.value.month }},00
+                                €/{{ switchFlag ? 'year' : 'month' }}
+                            </div>
+                            <div v-if="switchFlag">
+                                {{ price.value.yearMonth }} €/month
+                            </div>
                         </template>
                         <template v-slot:text>
                             <v-list density="compact">
@@ -39,65 +52,78 @@
     import utils from '@/utils/utils';
 
     const { isMobile } = utils.setupMobileUtils();
+    const switchFlag = ref(true);
     const prices = ref([
         {
             name: "Basic",
-            value: 15,
+            value: {
+                year: 150,
+                month: 15,
+                yearMonth: 12.5
+            },
             features: [
                 {
                     icon: "mdi-numeric-1-circle",
                     text: "Un chat-bot personalizzato"
                 },
                 {
-                    icon: "mdi-check-underline-circle",
+                    icon: "mdi-numeric-2-circle",
                     text: "Acquisizione di contatti"
                 },
                 {
-                    icon: "mdi-check-underline-circle",
+                    icon: "mdi-numeric-3-circle",
                     text: "Prenotazione di appuntamenti"
                 }
             ]
         },
         {
             name: "Premium",
-            value: 30,
+            value: {
+                year: 300,
+                month: 30,
+                yearMonth: 25
+            },
             features: [
                 {
                     icon: "mdi-numeric-1-circle",
                     text: "Un chat-bot personalizzato"
                 },
                 {
-                    icon: "mdi-check-underline-circle",
+                    icon: "mdi-numeric-2-circle",
                     text: "Acquisizione di contatti"
                 },
                 {
-                    icon: "mdi-check-underline-circle",
+                    icon: "mdi-numeric-3-circle",
                     text: "Prenotazione di appuntamenti"
                 },
                 {
-                    icon: "mdi-check-underline-circle",
+                    icon: "mdi-numeric-4-circle",
                     text: "Automazione delle vendite"
                 }
             ]
         },
         {
             name: "Enterprise",
-            value: 50,
+            value: {
+                year: 500,
+                month: 50,
+                yearMonth: 41.66
+            },
             features: [
                 {
-                    icon: "mdi-numeric-3-circle",
+                    icon: "mdi-numeric-1-circle",
                     text: "Tre chat-bot personalizzati"
                 },
                 {
-                    icon: "mdi-check-underline-circle",
+                    icon: "mdi-numeric-2-circle",
                     text: "Acquisizione di contatti"
                 },
                 {
-                    icon: "mdi-check-underline-circle",
+                    icon: "mdi-numeric-3-circle",
                     text: "Prenotazione di appuntamenti"
                 },
                 {
-                    icon: "mdi-check-underline-circle",
+                    icon: "mdi-numeric-4-circle",
                     text: "Automazione delle vendite"
                 }
             ]
@@ -113,5 +139,9 @@
         .d-flex.align-center {
             min-height: 275px;
         }
+    }
+    .divider-price {
+        height: 80px;
+        margin-top: 20px;
     }
 </style>
