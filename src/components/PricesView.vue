@@ -62,7 +62,7 @@
             value: {
                 year: 150,
                 month: 15,
-                yearMonth: 12.5
+                yearMonth: "12,50"
             },
             features: [
                 {
@@ -84,7 +84,7 @@
             value: {
                 year: 300,
                 month: 30,
-                yearMonth: 25
+                yearMonth: "25,00"
             },
             features: [
                 {
@@ -110,7 +110,7 @@
             value: {
                 year: 500,
                 month: 50,
-                yearMonth: 41.66
+                yearMonth: "41,66"
             },
             features: [
                 {
