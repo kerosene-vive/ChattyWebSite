@@ -36,13 +36,7 @@
             return 'Campo obbligatorio';
         }, async (value) => {
             if (!value) return true;
-            const post = utils.postRequest({
-                bot_id: value
-            });
-            const response = await fetch(`${post.hostname}try-bot`, post.options);
-            if (!response.ok)
-                throw new Error(`Errore nella risposta del server: ${response.status} - ${response.statusText}`);
-            const data = await response.json();
+            const data = await utils.tryBot(value);
             if (data.status == "ok") return true;
             return data.message;
         }

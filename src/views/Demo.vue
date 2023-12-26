@@ -35,6 +35,7 @@
 
 <script setup>
     import { ref } from 'vue';
+    import utils from '@/utils/utils';
 
     const messages = ref([
         {
@@ -53,13 +54,14 @@
                 bot: false,
                 message: userMessage.value
             });
+
             messages.value.push({
                 bot: true,
                 message: 'Risposta del bot'
             });
             userMessage.value = '';
         }
-    }
+    };
 </script>
 
 <style scoped>
