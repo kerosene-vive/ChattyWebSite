@@ -18,7 +18,7 @@ const injectChat = async (botId) => {
             <span class="fab-dots fab-dots-3"></span>
         </label>
         <div class="fab-wheel">
-            Ciao
+            <div class="chat-box">Ciao<div>
         </div>
     `;
     document.body.appendChild(newDiv);

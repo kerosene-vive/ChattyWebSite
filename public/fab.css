@@ -117,13 +117,20 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  width: 20rem;
+  width: 22rem;
   height: 50rem;
   transition: all 0.3s ease;
   transform-origin: bottom right;
   transform: scale(0);
+  z-index: 98;
 }
 
 .fab-checkbox:checked ~ .fab-wheel {
   transform: scale(1);
+}
+
+.chat-box {
+  background-color: #0c50a7;
+  width: 21rem;
+  height: 90vh;
 }
