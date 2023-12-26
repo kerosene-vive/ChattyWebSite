@@ -18,17 +18,12 @@ const injectChat = async (botId) => {
             <span class="fab-dots fab-dots-3"></span>
         </label>
         <div class="fab-wheel">
-            <div class="chat-box">Ciao<div>
+            <div class="fab-chat-box">Ciao<div>
         </div>
     `;
     document.body.appendChild(newDiv);
 };
 
-function openChat() {
-    alert('FAB Clicked!');
-}
-
 export default {
-    injectChat,
-    openChat
+    injectChat
 };

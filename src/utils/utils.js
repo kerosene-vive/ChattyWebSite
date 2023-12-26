@@ -21,7 +21,7 @@ const setupMobileUtils = () => {
 
 function postRequest(body) {
     return {
-        hostname: import.meta.env.VITE_HOSTNAME, 
+        hostname: 'https://generic-herbarium-seller-bot.andrearomano2.repl.co/', 
         options: {
             method: 'POST',
             headers: {
