@@ -44,7 +44,9 @@
 
     const router = useRouter();
     const tryBot = async () => {
-        if (!(await utils.validateInputAsync(botId.value, botIdRules)))
+        if (!(await utils.validateInputAsync(botId.value, botIdRules))) {
+            document.getElementById('fabContainer').style.display = 'none';
             router.push(`/demo/${botId.value}`);
+        }
     };
 </script>

@@ -9,6 +9,7 @@ const injectChat = async (botId) => {
     document.head.appendChild(cssLink);
 
     const newDiv = document.createElement('div');
+    newDiv.id = 'fabContainer';
     newDiv.className = 'fab-wrapper';
     newDiv.innerHTML = `
         <input id="fabCheckbox" type="checkbox" class="fab-checkbox" />
