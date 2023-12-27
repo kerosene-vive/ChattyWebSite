@@ -2,7 +2,7 @@
     <v-container>
         <v-row no-gutters class="chat-box">
             <v-col cols="12">
-                <div class="message-box">
+                <div class="message-box" ref="scrollContainer">
                     <v-list lines="ten" v-if="flagBot.status == 'ok'">
                         <v-list-item
                             v-for="(message, i) in messages"
@@ -57,18 +57,29 @@
     const loading = ref(false);
     const flagBot = ref(false);
     const userMessage = ref('');
+    const scrollContainer = ref(null);
 
     onMounted(async () => {
         flagBot.value = await utils.tryBot(route.params.botId);
     });
 
+    const addMessage = (bot, message) => {
+        messages.value.push({
+            bot: bot,
+            message: message
+        });
+        requestAnimationFrame(() => {
+            scrollContainer.value.scrollIntoView({
+                behavior: 'smooth',
+                block: 'end'
+            });
+        });
+    };
+
     const sendMessage = () => {
         if (userMessage.value && flagBot.value.status == 'ok') {
+            addMessage(false, userMessage.value);
             loading.value = true;
-            messages.value.push({
-                bot: false,
-                message: userMessage.value
-            });
             userMessage.value = '';
             var body = {
                 message: userMessage.value,
@@ -87,10 +98,7 @@
                     .then(data => {
                         threadId = data.thread_id;
                         loading.value = false;
-                        messages.value.push({
-                            bot: true,
-                            message: data.response
-                        });
+                        addMessage(true, data.response);
                     })
                     .catch(error => {
                         console.error('Errore nella richiesta:', error);
@@ -102,6 +110,7 @@
 <style scoped>
     .chat-box {
         height: 70vh;
+        overflow-y: auto;
     }
     .message-box {
         max-width: 1100px;
