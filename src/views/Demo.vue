@@ -24,7 +24,7 @@
             <v-col cols="12">
                 <v-card class="message-box">
                     <v-container class="step-container">
-                        <v-form @submit.prevent="sendMessageByForm">
+                        <v-form @submit.prevent="sendMessageByFormDemo">
                             <v-row>
                                 <v-col class="pa-2 ma-2" cols="13">
                                     <v-text-field v-model="userMessage" label="Message" />
@@ -52,10 +52,11 @@
 <script setup>
     import utils from '@/utils/utils';
     import marked from '@/chat/marked';
+    import sender from '@/chat/sender';
     import { ref, onMounted } from 'vue';
     import { useRoute } from 'vue-router';
 
-
+    var botId = null;
     var threadId = false;
     const messages = ref([]);
     const route = useRoute();
@@ -65,13 +66,15 @@
     const scrollContainer = ref(null);
 
     onMounted(async () => {
-        flagBot.value = await utils.tryBot(route.params.botId);
+        botId = route.params.botId;
+        flagBot.value = await utils.tryBot(botId);
         if (flagBot.value) {
-            sendMessage('');
+            loading.value = true;
+            sender.sendMessage(botId, threadId, '', addMessageDemo);
         }
     });
 
-    const addMessage = (bot, message) => {
+    const addMessageDemo = (message, bot = true) => {
         messages.value.push({
             bot: bot,
             message: message
@@ -82,38 +85,14 @@
                 block: 'end'
             });
         });
+        loading.value = false;
     };
 
-    const sendMessage = (message) => {
-        loading.value = true;
-        var body = {
-            message: message,
-            bot_id: route.params.botId
-        };
-        if (threadId) body.thread_id = threadId;
-        const post = utils.postRequest(body);
-
-        fetch(`${post.hostname}chat`, post.options)
-            .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`Errore nella risposta del server: ${response.status} - ${response.statusText}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    if (!threadId) threadId = data.thread_id;
-                    addMessage(true, data.response);
-                    loading.value = false;
-                })
-                .catch(error => {
-                    console.error('Errore nella richiesta:', error);
-                });
-    };
-
-    const sendMessageByForm = () => {
+    const sendMessageByFormDemo = async () => {
         if (userMessage.value && flagBot.value.status == 'ok') {
-            addMessage(false, userMessage.value);
-            sendMessage(userMessage.value);
+            addMessageDemo(userMessage.value, false);
+            loading.value = true;
+            sender.sendMessage(botId, threadId, userMessage.value, addMessageDemo);
             userMessage.value = '';
         }
     };
