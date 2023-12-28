@@ -80,12 +80,12 @@
         if (userMessage.value && flagBot.value.status == 'ok') {
             addMessage(false, userMessage.value);
             loading.value = true;
-            userMessage.value = '';
             var body = {
                 message: userMessage.value,
                 bot_id: route.params.botId
             };
-            if (threadId) body.threadId = threadId;
+            userMessage.value = '';
+            if (threadId) body.thread_id = threadId;
             const post = utils.postRequest(body);
 
             fetch(`${post.hostname}chat`, post.options)
@@ -96,7 +96,7 @@
                         return response.json();
                     })
                     .then(data => {
-                        threadId = data.thread_id;
+                        if (!threadId) threadId = data.thread_id;
                         loading.value = false;
                         addMessage(true, data.response);
                     })
