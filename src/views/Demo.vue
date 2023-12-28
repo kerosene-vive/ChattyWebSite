@@ -8,8 +8,11 @@
                             v-for="(message, i) in messages"
                             :key="i"
                             :title="message.bot ? 'Bot' : 'Utente'"
-                            :subtitle="message.message"
-                        />
+                        >
+                        <template v-slot:subtitle>
+                            <div>{{ message.message }}</div>
+                        </template>
+                        </v-list-item>
                     </v-list>
                     <div v-else>
                         {{ flagBot.message }}
@@ -21,7 +24,7 @@
             <v-col cols="12">
                 <v-card class="message-box">
                     <v-container class="step-container">
-                        <v-form @submit.prevent="sendMessage">
+                        <v-form @submit.prevent="sendMessageByForm">
                             <v-row>
                                 <v-col class="pa-2 ma-2" cols="13">
                                     <v-text-field v-model="userMessage" label="Message" />
@@ -47,9 +50,11 @@
 </template>
 
 <script setup>
-    import { ref, onMounted } from 'vue';
+    //import marked from 'marked';
     import utils from '@/utils/utils';
+    import { ref, onMounted } from 'vue';
     import { useRoute } from 'vue-router';
+
 
     var threadId = false;
     const messages = ref([]);
@@ -61,6 +66,9 @@
 
     onMounted(async () => {
         flagBot.value = await utils.tryBot(route.params.botId);
+        if (flagBot.value) {
+            sendMessage('');
+        }
     });
 
     const addMessage = (bot, message) => {
@@ -76,33 +84,37 @@
         });
     };
 
-    const sendMessage = () => {
+    const sendMessage = (message) => {
+        loading.value = true;
+        var body = {
+            message: message,
+            bot_id: route.params.botId
+        };
+        if (threadId) body.thread_id = threadId;
+        const post = utils.postRequest(body);
+
+        fetch(`${post.hostname}chat`, post.options)
+            .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Errore nella risposta del server: ${response.status} - ${response.statusText}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (!threadId) threadId = data.thread_id;
+                    addMessage(true, data.response);
+                    loading.value = false;
+                })
+                .catch(error => {
+                    console.error('Errore nella richiesta:', error);
+                });
+    };
+
+    const sendMessageByForm = () => {
         if (userMessage.value && flagBot.value.status == 'ok') {
             addMessage(false, userMessage.value);
-            loading.value = true;
-            var body = {
-                message: userMessage.value,
-                bot_id: route.params.botId
-            };
+            sendMessage(userMessage.value);
             userMessage.value = '';
-            if (threadId) body.thread_id = threadId;
-            const post = utils.postRequest(body);
-
-            fetch(`${post.hostname}chat`, post.options)
-                .then(response => {
-                        if (!response.ok) {
-                            throw new Error(`Errore nella risposta del server: ${response.status} - ${response.statusText}`);
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        if (!threadId) threadId = data.thread_id;
-                        loading.value = false;
-                        addMessage(true, data.response);
-                    })
-                    .catch(error => {
-                        console.error('Errore nella richiesta:', error);
-                    });
         }
     };
 </script>
