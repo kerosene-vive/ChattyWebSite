@@ -117,8 +117,8 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  width: 22rem;
-  height: 50rem;
+  width: 40vh;
+  height: 100vh;
   transition: all 0.3s ease;
   transform-origin: bottom right;
   transform: scale(0);
