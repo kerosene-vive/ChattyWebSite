@@ -9,9 +9,9 @@
                             :key="i"
                             :title="message.bot ? 'Bot' : 'Utente'"
                         >
-                        <template v-slot:subtitle>
-                            <div>{{ message.message }}</div>
-                        </template>
+                            <template v-slot:subtitle>
+                                <div v-html="marked.parseMd(message.message)"></div>
+                            </template>
                         </v-list-item>
                     </v-list>
                     <div v-else>
@@ -50,8 +50,8 @@
 </template>
 
 <script setup>
-    //import marked from 'marked';
     import utils from '@/utils/utils';
+    import marked from '@/chat/marked';
     import { ref, onMounted } from 'vue';
     import { useRoute } from 'vue-router';
 
