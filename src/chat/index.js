@@ -32,6 +32,13 @@ const html = `
                             Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
                         </div>
                     </li>
+                    <li class="you">
+                        <div class="entete"><h2>Vincent</h2></div>
+                        <div class="triangle"></div>
+                        <div class="message">
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+                        </div>
+                    </li>
                 </ul>
             </div>
             <div class="fab-sender">

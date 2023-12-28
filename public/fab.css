@@ -131,21 +131,21 @@
 
 .fab-chat-box {
   background-color: blue;
-  width: 21rem;
-  height: 90vh;
+  width: 37vh;
+  height: 95vh;
 }
 
 .fab-messages {
   background-color: green;
-  width: 19rem;
-  height: 75vh;
+  width: 34vh;
+  height: 80vh;
   margin: auto;
-	overflow-y:scroll;
+	overflow-y: auto;
 }
 
 .fab-sender {
   background-color: red;
-  width: 19rem;
+  width: 34vh;
   height: 10vh;
   margin: auto;
 }
