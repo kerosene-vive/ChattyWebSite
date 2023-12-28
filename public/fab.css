@@ -130,7 +130,22 @@
 }
 
 .fab-chat-box {
-  background-color: #0c50a7;
+  background-color: blue;
   width: 21rem;
   height: 90vh;
+}
+
+.fab-messages {
+  background-color: green;
+  width: 19rem;
+  height: 75vh;
+  margin: auto;
+	overflow-y:scroll;
+}
+
+.fab-sender {
+  background-color: red;
+  width: 19rem;
+  height: 10vh;
+  margin: auto;
 }
