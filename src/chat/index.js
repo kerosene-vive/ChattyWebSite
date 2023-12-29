@@ -11,7 +11,7 @@ const html = `
     </label>
     <div class="fab-wheel">
         <div class="fab-chat-box">
-            <div class="fab-header">Chatty</div>
+            <div class="fab-header"><h4>Chatty</h4></div>
             <div class="fab-messages">
                 <ul id="chat"></ul>
             </div>
