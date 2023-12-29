@@ -14,8 +14,10 @@ const html = `
                 <ul id="chat"></ul>
             </div>
             <div class="fab-sender">
-                <input type="text" id="input-text" />
-                <button id="sender-button">Invia</button>
+                <div class="sender-container">
+                    <input type="text" id="input-text" />
+                    <button id="sender-button">Invia</button>
+                </div>
             </div>
         <div>
     </div>

@@ -42,11 +42,15 @@
 }
 
 #chat .you .triangle{
-		border-color: transparent transparent #58b666 transparent;
-		margin-left:15px;
+    border-color: transparent transparent #58b666 transparent;
+    margin-left:15px;
 }
 
 #chat .me .triangle{
-		border-color: transparent transparent #6fbced transparent;
-		margin-left:200px;
+    border-color: transparent transparent #6fbced transparent;
+    margin-left:200px;
+}
+
+#chat input {
+    float: left
 }

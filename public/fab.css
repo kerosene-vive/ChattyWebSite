@@ -18,7 +18,6 @@
   right: -1rem;
   width: 4rem;
   height: 4rem;
-  background: blue;
   border-radius: 50%;
   background: #126ee2;
   box-shadow: 0px 5px 20px #81a4f1;
@@ -117,8 +116,8 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  width: 39vh;
-  height: 78vh;
+  width: 35vh;
+  height: 77vh;
   transition: all 0.3s ease;
   transform-origin: bottom right;
   transform: scale(0);
@@ -136,6 +135,7 @@
 
 .fab-chat-box {
   background-color: blue;
+  border-radius: 10px;
   width: 100%;
   height: 75vh;
   text-align: center;
@@ -146,18 +146,32 @@
 }
 
 .fab-messages {
-  background-color: green;
   width: 34vh;
-  height: 80vh;
+  height: 85vh;
   margin: auto;
 	overflow-y: auto;
-  text-align: center;
 }
 
 .fab-sender {
-  background-color: red;
+  text-align: left;
   width: 34vh;
-  height: 10vh;
+  height: 7vh;
   margin: auto;
-  text-align: center;
+}
+
+.sender-container {
+  border: solid 2px #2c87e8;
+  width: 30vh;
+  border-radius: 10px;
+  background-color: #81a4f1;
+}
+
+.sender-container input {
+  height: 5vh;
+  width: 25vh;
+}
+
+.sender-container button {
+  height: 5vh;
+  width: 3vh;
 }
