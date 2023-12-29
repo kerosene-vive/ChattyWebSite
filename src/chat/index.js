@@ -17,7 +17,10 @@ const html = `
             <div class="fab-sender">
                 <div class="sender-container">
                     <input type="text" id="input-text" />
-                    <button id="sender-button">Invia</button>
+                    <button id="circular-button">
+                        <span class="btn-icon">+</span>
+                        <span class="btn-loader"></span>
+                    </button>
                 </div>
             </div>
         <div>
@@ -40,8 +43,9 @@ const injectChat = (botIdInjected) => {
     newDiv.innerHTML = html;
     document.body.appendChild(newDiv);
 
-    sender.sendMessage(botId, threadId, "", addMessage);
-    document.getElementById("sender-button").addEventListener("click", sendMessageByForm);
+    document.getElementById('circular-button').classList.add('btn-loading');
+    sender.sendMessage(botId, threadId, "Ciao", addMessage);
+    document.getElementById("circular-button").addEventListener("click", sendMessageByForm);
 };
 
 const addCss = (href) => {
@@ -60,6 +64,7 @@ const addMessage = (message, bot = true) => {
         <div class="triangle"></div>
         <div class="message">${marked.parseMd(message)}</div>
     `;
+    document.getElementById('circular-button').classList.remove('btn-loading');
     chat.appendChild(msg);
 };
 
@@ -67,6 +72,7 @@ const sendMessageByForm = () => {
     const input = document.getElementById("input-text");
     if (input.value != "") {
         addMessage(input.value, false);
+        document.getElementById('circular-button').classList.add('btn-loading');
         sender.sendMessage(botId, threadId, input.value, addMessage);
         input.value = "";
     }

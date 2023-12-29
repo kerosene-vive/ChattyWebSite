@@ -70,7 +70,7 @@
         flagBot.value = await utils.tryBot(botId);
         if (flagBot.value) {
             loading.value = true;
-            sender.sendMessage(botId, threadId, '', addMessageDemo);
+            sender.sendMessage(botId, threadId, 'Ciao', addMessageDemo);
         }
     });
 
