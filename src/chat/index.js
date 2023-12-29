@@ -30,7 +30,7 @@ const html = `
 var threadId = false;
 var botId = false;
 
-const injectChat = (botIdInjected) => {
+const injectChat = async (botIdInjected) => {
     botId = botIdInjected;
     if ((await utils.tryBot(botId)).status != "ok") return;
 
@@ -43,9 +43,10 @@ const injectChat = (botIdInjected) => {
     newDiv.innerHTML = html;
     document.body.appendChild(newDiv);
 
-    document.getElementById('circular-button').classList.add('btn-loading');
+    const button = document.getElementById('circular-button')
+    button.classList.add('btn-loading');
     sender.sendMessage(botId, threadId, "Ciao", addMessage);
-    document.getElementById("circular-button").addEventListener("click", sendMessageByForm);
+    button.addEventListener("click", sendMessageByForm);
 };
 
 const addCss = (href) => {
@@ -58,11 +59,11 @@ const addCss = (href) => {
 const addMessage = (message, bot = true) => {
     const chat = document.getElementById("chat");
     const msg = document.createElement("li");
-    msg.className = bot ? "you" : "me";
+    if (bot) msg.style.marginRight = "75px";
+    else msg.style.marginLeft = "75px";
     msg.innerHTML = `
-        <div class="entete"><h2>${bot ? "Bot" : "Utente"}</h2></div>
-        <div class="triangle"></div>
-        <div class="message">${marked.parseMd(message)}</div>
+        <h4>${bot ? "Bot" : "Utente"}</h4>
+        <p>${marked.parseMd(message)}</p>
     `;
     document.getElementById('circular-button').classList.remove('btn-loading');
     chat.appendChild(msg);

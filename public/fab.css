@@ -153,6 +153,7 @@
   height: 85vh;
   margin: auto;
 	overflow-y: auto;
+  color: white
 }
 
 .fab-sender {
@@ -160,4 +161,23 @@
   width: 34vh;
   height: 7vh;
   margin: auto;
+}
+
+@media screen and (min-width: 768px) {
+  .fab-messages::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  .fab-messages::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+
+  .fab-messages::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+
+  .fab-messages::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
 }
