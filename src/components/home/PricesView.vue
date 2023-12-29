@@ -9,10 +9,6 @@
                 <v-switch :label="switchFlag ? 'Annuale' : 'Mensile'" v-model="switchFlag" class="switch-price" />
             </v-col>
         </v-row>
-        <v-alert variant="tonal" elevation="20">
-            <i>Nota: Questi prezzi non includono i costi delle API di OpenAI.</i>
-        </v-alert>
-        <br>
         <v-item-group selected-class="bg-primary">
             <v-row>
                 <v-col v-for="(price, i) in prices" :key="i" cols="12" md="4">

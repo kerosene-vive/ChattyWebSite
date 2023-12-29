@@ -15,6 +15,16 @@ const routes = [
         path: '/demo/:botId',
         name: 'Demo',
         component: () => import('@/views/Demo.vue'),
+      },
+      {
+        path: '/login',
+        name: 'Login',
+        component: () => import('@/views/Login.vue'),
+      },
+      {
+        path: '/dashboard/:botId',
+        name: 'Dashboard',
+        component: () => import('@/views/Dashboard.vue'),
       }
     ],
   },

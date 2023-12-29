@@ -2,57 +2,59 @@
   <v-container>
     <v-row>
       <v-col>
-        <v-card elevation="20" class="form-container">
+        <v-card elevation="20" class="form-container" v-if="botId == ''">
           <v-card-title style="white-space: normal;">Registrati e richiedi una demo gratuita</v-card-title>
           <v-form fast-fail @submit.prevent="askBot">
             <v-card-text>
               <v-row no-gutters>
                 <v-col cols="12" md="5">
-                  <v-text-field
-                    v-model="name"
-                    label="Nome dell'azienda *"
-                    :rules="requiredRules"
-                  />
+                  <v-text-field v-model="name" label="Nome dell'azienda *" :rules="requiredRules" />
                 </v-col>
                 <v-spacer></v-spacer>
                 <v-col cols="12" md="5">
-                  <v-text-field
-                    v-model="site"
-                    label="Sito web *"
-                    :rules="siteRules"
-                  />
+                  <v-text-field v-model="site" label="Sito web *" :rules="siteRules" />
                 </v-col>
               </v-row>
               <v-row no-gutters>
                 <v-col cols="12" md="12">
-                  <v-textarea
-                    label="Altre informazioni sulla tua azienda"
-                    v-model="info"
-                    rows="3"
+                  <v-textarea 
+                    label="Altre informazioni sulla tua azienda" v-model="info" rows="3"
                     hint="Più informazioni ci fornirai sulla tua azienda, più il tuo Chatty sarà efficente"
                   />
                 </v-col>
               </v-row>
               <v-row no-gutters>
                 <v-col cols="12" md="5">
-                  <v-text-field
-                    v-model="email"
-                    label="Email *"
-                    :rules="emailRules"
-                  />
+                  <v-text-field v-model="email" label="Email *" :rules="emailRules" />
                 </v-col>
                 <v-spacer></v-spacer>
                 <v-col cols="12" md="5">
-                  <v-text-field
-                    v-model="site"
-                    label="Password *"
-                    :rules="siteRules"
-                  />
+                  <v-text-field v-model="password" type="password" label="Password *" :rules="passwordRules" />
                 </v-col>
               </v-row>
+              <div v-if="error != ''" class="error-message">{{ error }}</div>
             </v-card-text>
             <v-card-actions>
               <v-btn variant="tonal" type="submit" block class="mt-2">Ottieni la tua demo</v-btn>
+            </v-card-actions>
+          </v-form>
+        </v-card>
+        <v-card elevation="20" class="form-container" v-else>
+          <v-card-title style="white-space: normal;">Verifica la tua mail</v-card-title>
+          <v-form @submit.prevent="verifyOtp">
+            <v-card-text>
+              <div style="text-align: center;">
+                Abbiamo inviato una mail all'indirizzo {{ email }} con un codice OTP a 6 cifre.
+              </div>
+              <v-otp-input v-model="otp" type="password" />
+              <div v-if="error != ''" class="error-message">{{ error }}</div>
+            </v-card-text>
+            <v-card-actions>
+              <v-btn class="mt-2" type="submit" variant="tonal">Verifica</v-btn>
+              <v-spacer></v-spacer>
+              <div class="text-caption">
+                Non hai ricevuto nessun codice? <a href="#" @click.prevent="sendOtpAgain">Invia di nuovo</a>
+              </div>
             </v-card-actions>
           </v-form>
         </v-card>
@@ -67,12 +69,18 @@
 <script setup>
   import { ref } from 'vue';
   import utils from '@/utils/utils';
+  import { useRouter } from 'vue-router';
   import Timeline from '@/components/home/Timeline';
 
+  const otp = ref('');
   const site = ref('');
   const name = ref('');
-  const email = ref('');
   const info = ref('');
+  const email = ref('');
+  const error = ref('');
+  const botId = ref('');
+  const password = ref('');
+  const router = useRouter();
   const requiredRules = [
     (value) => {
       if (value) return true;
@@ -89,23 +97,68 @@
     (value) => {
       if (/^(https?:\/\/)?([\w-]+\.)+([a-z]{2,})+(\/[\w-]*)*(\?[a-z0-9-]+=[a-z0-9-%]+(&[a-z0-9-]+=[a-z0-9-%]+)*)?$/i.test(value))
           return true;
-      return 'Sito non valida.';
+      return 'Sito non valido.';
+    }
+  ]);
+  const passwordRules = requiredRules.concat([
+    (value) => {
+      if (/[A-Z]/.test(value)) return true;
+      return 'La password deve contenere almeno una lettera maiscola.';
+    },
+    (value) => {
+      if (/[a-z]/.test(value)) return true;
+      return 'La password deve contenere almeno una lettera minuscola.';
+    },
+    (value) => {
+      if (/\d/.test(value)) return true;
+      return 'La password deve contenere almeno un numero.';
+    },
+    (value) => {
+      if (value.length >= 8) return true;
+      return 'La password deve contenere almeno 8 caratteri.';
     }
   ]);
 
+  const verifyOtp = () => {
+    if (otp.value) {
+      error.value = '';
+      const post = utils.postRequest({
+        otp: otp.value,
+        bot_id: botId
+      });
+
+      fetch(`${post.hostname}otp`, post.options)
+        .then(response => {
+          if (!response.ok)
+            throw new Error(`Errore nella risposta del server: ${response.status} - ${response.statusText}`);
+          return response.json();
+        })
+        .then(data => {
+          if (data.status == 'ok')
+            router.push(`/dashboard/${botId.value}`);
+          else
+            error.value = data.message;
+        })
+        .catch(error => {
+          console.error('Errore nella richiesta:', error);
+        });
+    }
+  };
+
   const askBot = () => {
     if (
-      !utils.validateInput(name.value, requiredRules) &&
-      !utils.validateInput(email.value, emailRules) &&
-      !utils.validateInput(site.value, siteRules)
+      !utils.validateInput(name.value, requiredRules) && !utils.validateInput(email.value, emailRules) &&
+      !utils.validateInput(site.value, siteRules) && !utils.validateInput(password.value, passwordRules)
     ) {
+      error.value = '';
       const post = utils.postRequest({
-          args: {
-              name: name.value,
-              email: email.value,
-              website: site.value,
-              description: info.value
-          }
+        args: {
+          name: name.value,
+          email: email.value,
+          website: site.value,
+          description: info.value,
+          password: password.value
+        }
       });
 
       fetch(`${post.hostname}ask-bot`, post.options)
@@ -115,12 +168,34 @@
           return response.json();
         })
         .then(data => {
-          console.log('Risposta dal server:', data);
+          if (data.status == 'ok')
+            botId.value = data.bot_id;
+          else
+            error.value = data.error;
         })
         .catch(error => {
           console.error('Errore nella richiesta:', error);
         });
     }
+  };
+
+  const sendOtpAgain = () => {
+    error.value = '';
+    alert('ciao')
+    const post = utils.postRequest({
+      otp: otp.value,
+      bot_id: botId
+    });
+
+    fetch(`${post.hostname}send-otp-again`, post.options)
+      .then(response => {
+        if (!response.ok)
+          throw new Error(`Errore nella risposta del server: ${response.status} - ${response.statusText}`);
+        return response.json();
+      })
+      .catch(error => {
+        console.error('Errore nella richiesta:', error);
+      });
   };
 </script>
 
@@ -133,8 +208,12 @@
     padding-bottom: 20px;
   }
   .timeline-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .error-message {
+    text-align: center;
+    color: red;
   }
 </style>
