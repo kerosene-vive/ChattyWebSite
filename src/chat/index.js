@@ -1,4 +1,5 @@
 import sender from "./sender";
+import marked from './marked';
 import utils from "@/utils/utils";
 
 const html = `
@@ -57,7 +58,7 @@ const addMessage = (message, bot = true) => {
     msg.innerHTML = `
         <div class="entete"><h2>${bot ? "Bot" : "Utente"}</h2></div>
         <div class="triangle"></div>
-        <div class="message">${message}</div>
+        <div class="message">${marked.parseMd(message)}</div>
     `;
     chat.appendChild(msg);
 };
