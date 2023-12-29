@@ -24,6 +24,14 @@ const sendMessage = (botId, threadId, message, func) => {
             });
 };
 
+const scrollToBottom = (container) => {
+    container.scrollIntoView({
+        behavior: 'smooth',
+        block: 'end'
+    });
+};
+
 export default {
-    sendMessage
+    sendMessage,
+    scrollToBottom
 };

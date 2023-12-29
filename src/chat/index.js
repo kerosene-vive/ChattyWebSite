@@ -32,7 +32,7 @@ var botId = false;
 
 const injectChat = (botIdInjected) => {
     botId = botIdInjected;
-    //if ((await utils.tryBot(botId)).status != "ok") return;
+    if ((await utils.tryBot(botId)).status != "ok") return;
 
     addCss("./fab.css");
     addCss("./chat.css");
@@ -66,6 +66,7 @@ const addMessage = (message, bot = true) => {
     `;
     document.getElementById('circular-button').classList.remove('btn-loading');
     chat.appendChild(msg);
+    sender.scrollToBottom(chat);
 };
 
 const sendMessageByForm = () => {

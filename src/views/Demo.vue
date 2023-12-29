@@ -80,10 +80,7 @@
             message: message
         });
         requestAnimationFrame(() => {
-            scrollContainer.value.scrollIntoView({
-                behavior: 'smooth',
-                block: 'end'
-            });
+            sender.scrollToBottom(scrollContainer.value);
         });
         loading.value = false;
     };
