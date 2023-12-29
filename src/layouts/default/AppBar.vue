@@ -9,7 +9,7 @@
         v-for="(item, i) in items"
         :key="i"
         :value="item"
-        @click="link(item.hash)"
+        @click="router.push(item.path)"
       >
         {{ item.title }}
       </v-list-item>
@@ -27,7 +27,7 @@
       v-for="(item, index) in items"
       :key="index"
     >
-      <v-btn variant="text" @click="link(item.hash)">
+      <v-btn variant="text" @click="router.push(item.path)">
         {{ item.title }}
       </v-btn>
     </div>
@@ -39,31 +39,32 @@
   import utils from '@/utils/utils';
   import { useRouter } from 'vue-router';
 
-  const { isMobile } = utils.setupMobileUtils();
   const drawer = ref(null);
+  const router = ref(useRouter());
+  const { isMobile } = utils.setupMobileUtils();
+
   const items = ref([
     {
-      title: 'Demo',
-      hash: 'demoSection'
+      title: 'Home',
+      path: '/'
     },
     {
       title: 'Potenzialità',
-      hash: 'potenzialitaSection'
+      path: '/#potenzialitaSection'
     },
     {
       title: 'Funzionamento',
-      hash: 'funzionamentoSection'
+      path: '/#funzionamentoSection'
     },
     {
       title: 'Prezzi',
-      hash: 'prezziSection'
+      path: '/#prezziSection'
+    },
+    {
+      title: 'Accedi',
+      path: '/login'
     }
   ]);
-
-  const router = useRouter();
-  const link = (hash) => {
-    router.push(`/#${hash}`);
-  }
 </script>
 
 <style scoped>

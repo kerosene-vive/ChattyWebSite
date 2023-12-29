@@ -1,7 +1,6 @@
 <template>
-  <TripleGrid id="demoSection" />
+  <TripleGrid />
   <ContactForm />
-  <Timeline />
   <PotentialCarousel id="potenzialitaSection" />
   <FunctionalCard id="funzionamentoSection" />
   <PricesView id="prezziSection" />
@@ -11,7 +10,6 @@
 
 <script setup>
   import chat from '@/chat/index';
-  import Timeline from '@/components/home/Timeline.vue';
   import TripleGrid from '@/components/home/TripleGrid.vue';
   import PricesView from '@/components/home/PricesView.vue';
   import AddingValue from '@/components/home/AddingValue.vue';

@@ -13,6 +13,15 @@ const html = `
         <div class="fab-chat-box">
             <div class="fab-header"><h4>Chatty</h4></div>
             <div class="fab-messages">
+                <div class="fab-inital-text">
+                    <p>
+                        Usa questa chat per interagire con Chatty, il bot fatto per il nostro sito,
+                        in grado di effettuare tutte le operazioni del sito, come richiedere una demo.
+                    </p>
+                    <p>
+                        Ottieni anche tu la demo gratuita di un chat-box che possa esprimere la voce della tua azienda.
+                    </p>
+                </div>
                 <ul id="chat"></ul>
             </div>
             <div class="fab-sender">

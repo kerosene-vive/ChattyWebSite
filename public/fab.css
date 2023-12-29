@@ -175,6 +175,12 @@
   color: white;
 }
 
+.fab-inital-text {
+  padding-left: 5vh;
+  padding-right: 5vh;
+  padding-top: 2vh;
+}
+
 @media screen and (min-width: 768px) {
   .fab-messages::-webkit-scrollbar {
     width: 5px;
