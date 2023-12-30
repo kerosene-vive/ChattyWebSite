@@ -97,11 +97,7 @@
 
 <style scoped>
     .chat-box {
-        height: 70vh;
+        height: 45vh;
         overflow-y: auto;
-    }
-    .message-box {
-        max-width: 1100px;
-        margin: auto;
     }
 </style>

@@ -5,7 +5,7 @@
             <v-form @submit.prevent="changePassword">
                 <v-text-field v-model="pass" label="Password" type="password" />
                 <v-text-field v-model="passConfirm" label="Conferma password" type="password" />
-                <v-btn type="submit" block class="mt-2">Invia</v-btn>
+                <v-btn type="submit" block class="mt-2" variant="tonal">Invia</v-btn>
             </v-form>
             <br><div class="error-message">{{ error }}</div>
             <div class="text-caption">
@@ -24,11 +24,11 @@
     const pass = ref('');
     const error = ref('');
     const message = ref('');
-    const router = useRoute();
+    const route = useRoute();
     const passConfirm = ref('');
 
     const changePassword = () => {
-        const token = router.params.token;
+        const token = route.params.token;
         error.value = '';
         message.value = '';
         if (pass.value && passConfirm.value && pass.value == passConfirm.value) {

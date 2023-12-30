@@ -7,14 +7,14 @@ const checkMobile = () => {
 };
 
 const setupMobileUtils = () => {
-  onMounted(() => {
-      checkMobile();
-      window.addEventListener('resize', checkMobile);
-  });
+    onMounted(() => {
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+    });
 
-  onBeforeUnmount(() => {
-      window.removeEventListener('resize', checkMobile);
-  });
+    onBeforeUnmount(() => {
+        window.removeEventListener('resize', checkMobile);
+    });
 
   return { isMobile };
 };

@@ -6,7 +6,7 @@
                 <v-form @submit.prevent="login">
                     <v-text-field v-model="mail" label="Email" />
                     <v-text-field v-model="pass" label="Password" type="password" />
-                    <v-btn type="submit" block class="mt-2">Accedi</v-btn>
+                    <v-btn type="submit" block class="mt-2" variant="tonal">Accedi</v-btn>
                 </v-form>
                 <br><div class="error-message">{{ errorLogin }}</div>
                 <br><div class="text-caption">
@@ -17,7 +17,7 @@
                 <h3>Recupera la tua password</h3><br>
                 <v-form @submit.prevent="askChangePassword">
                     <v-text-field v-model="mail" label="Email" />
-                    <v-btn type="submit" block class="mt-2">Invia</v-btn>
+                    <v-btn type="submit" block class="mt-2" variant="tonal">Invia</v-btn>
                 </v-form>
                 <br><div class="error-message">{{ errorChange }}</div>
                 <div class="text-caption">
@@ -32,15 +32,15 @@
 <script setup>
     import { ref } from 'vue';
     import utils from '@/utils/utils';
-    import { useRoute } from 'vue-router';
+    import { useRouter } from 'vue-router';
 
     const mail = ref('');
     const pass = ref('');
-    const router = useRoute();
+    const router = useRouter();
     const errorLogin = ref('');
     const errorChange = ref('');
-    const messageChange = ref('');
     const changeFlag = ref(true);
+    const messageChange = ref('');
 
     const login = () => {
         if (mail.value && pass.value) {

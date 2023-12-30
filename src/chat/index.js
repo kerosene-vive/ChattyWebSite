@@ -15,8 +15,8 @@ const html = `
             <div class="fab-messages">
                 <div class="fab-inital-text">
                     <p>
-                        Usa questa chat per interagire con il nostro bot,
-                        il tuo può essere integrato in maniera similare anche sul tuo sito web.
+                        Usa questa chat per interagire con il nostro Chatty,
+                        il tuo chat-bot può essere integrato in maniera similare anche sul tuo sito web.
                     </p>
                 </div>
                 <ul id="chat"></ul>
@@ -41,8 +41,8 @@ const injectChat = async (botIdInjected) => {
     botId = botIdInjected;
     if ((await utils.tryBot(botId)).status != "ok") return;
 
-    addCss("./fab.css");
-    addCss("./chat.css");
+    addCss("../fab.css");
+    addCss("../chat.css");
 
     const newDiv = document.createElement("div");
     newDiv.id = "fabContainer";
