@@ -19,6 +19,7 @@
 <script setup>
     import { ref } from 'vue';
     import utils from '@/utils/utils';
+    import { SHA256 } from 'crypto-js';
     import { useRoute } from 'vue-router';
 
     const pass = ref('');
@@ -33,7 +34,7 @@
         message.value = '';
         if (pass.value && passConfirm.value && pass.value == passConfirm.value) {
             const post = utils.postRequest({
-                new_password: pass.value,
+                new_password: SHA256(pass.value).toString(),
                 reset_pass_token: token
             });
 
@@ -47,7 +48,7 @@
                     if (data.status == 'ok')
                         message.value = data.message;
                     else
-                    error.value = data.error;
+                        error.value = data.error;
                 })
                 .catch(error => {
                     console.error('Errore nella richiesta:', error);

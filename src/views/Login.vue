@@ -32,6 +32,7 @@
 <script setup>
     import { ref } from 'vue';
     import utils from '@/utils/utils';
+    import { SHA256 } from 'crypto-js';
     import { useRouter } from 'vue-router';
 
     const mail = ref('');
@@ -47,7 +48,7 @@
             errorLogin.value = '';
             const post = utils.postRequest({
                 email: mail.value,
-                password: pass.value
+                password: SHA256(pass.value).toString()
             });
 
             fetch(`${post.hostname}login`, post.options)

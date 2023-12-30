@@ -37,7 +37,20 @@
 .login-box {
     padding: 20px;
 }
+
 .message-box {
     max-width: 1100px;
     margin: auto;
+}
+
+.gradient {
+    background: linear-gradient(to left, #04767C, #620769);
+}
+
+.v-timeline-divider__after {
+    background: white;
+}
+
+.v-timeline-divider__before {
+    background: white;
 }

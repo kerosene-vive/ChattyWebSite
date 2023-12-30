@@ -1,4 +1,4 @@
-<template>
+<template class="app-bar">
   <v-navigation-drawer
     v-model="drawer"
     location="bottom"
@@ -15,7 +15,7 @@
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
-  <v-app-bar :elevation="2">
+  <v-app-bar :elevation="2" color="#49246E">
     <v-app-bar-nav-icon
       v-if="isMobile"
       @click.stop="drawer = !drawer"
