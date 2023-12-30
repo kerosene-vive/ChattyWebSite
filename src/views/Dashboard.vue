@@ -7,7 +7,9 @@
     <v-container v-if="status == 'Ready'">
         <h1 class="message-box">Usa questa chat per provare la demo del tuo bot</h1>
         <Demo />
-        <PricesView />
+        <PricesView titleCard="Per procedere con l'integrazione scegli un abbonamento" />
+    </v-container>
+    <v-container v-if="status == 'Production'">
     </v-container>
 </template>
 

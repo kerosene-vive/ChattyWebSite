@@ -3,7 +3,7 @@
         <v-divider></v-divider>
         <v-row class="divider-price">
             <v-col>
-                <h3>Prezzi</h3>
+                <h3 block>{{ titleCard }}</h3>
             </v-col>
             <v-col cols="auto">
                 <v-switch :label="switchFlag ? 'Annuale' : 'Mensile'" v-model="switchFlag" class="switch-price" />
@@ -13,7 +13,7 @@
             <v-row>
                 <v-col v-for="(price, i) in prices" :key="i" cols="12" md="4">
                     <v-item>
-                        <v-card class="d-flex align-center" height="190" elevation="20">
+                        <v-card class="d-flex align-center" height="190" elevation="20" @click.prevent="buy(price.name)">
                             <template v-slot:title>
                                 {{ price.name }}
                             </template>
@@ -50,8 +50,9 @@
     import { ref } from 'vue';
     import utils from '@/utils/utils';
 
-    const { isMobile } = utils.setupMobileUtils();
     const switchFlag = ref(true);
+    const { titleCard } = defineProps(['titleCard']);
+    const { isMobile } = utils.setupMobileUtils();
     const prices = ref([
         {
             name: "Basic",
@@ -128,6 +129,10 @@
             ]
         }
     ])
+
+    const buy = (packageName) => {
+        alert(packageName)
+    }
 </script>
 
 <style scoped>
@@ -140,7 +145,6 @@
         }
     }
     .divider-price {
-        height: 80px;
         margin-top: 20px;
     }
     .switch-price {
