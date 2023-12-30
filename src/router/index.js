@@ -25,6 +25,11 @@ const routes = [
         path: '/dashboard/:botId',
         name: 'Dashboard',
         component: () => import('@/views/Dashboard.vue'),
+      },
+      {
+        path: '/change-password/:token',
+        name: 'Cambia Password',
+        component: () => import('@/views/ChangePassword.vue'),
       }
     ],
   },

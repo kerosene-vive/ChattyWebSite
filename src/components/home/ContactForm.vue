@@ -124,7 +124,7 @@
       error.value = '';
       const post = utils.postRequest({
         otp: otp.value,
-        bot_id: botId
+        bot_id: botId.value
       });
 
       fetch(`${post.hostname}otp`, post.options)
@@ -137,7 +137,7 @@
           if (data.status == 'ok')
             router.push(`/dashboard/${botId.value}`);
           else
-            error.value = data.message;
+            error.value = data.error;
         })
         .catch(error => {
           console.error('Errore nella richiesta:', error);
@@ -181,10 +181,9 @@
 
   const sendOtpAgain = () => {
     error.value = '';
-    alert('ciao')
     const post = utils.postRequest({
       otp: otp.value,
-      bot_id: botId
+      bot_id: botId.value
     });
 
     fetch(`${post.hostname}send-otp-again`, post.options)
@@ -211,9 +210,5 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  .error-message {
-    text-align: center;
-    color: red;
   }
 </style>

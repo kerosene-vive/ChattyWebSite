@@ -15,11 +15,8 @@ const html = `
             <div class="fab-messages">
                 <div class="fab-inital-text">
                     <p>
-                        Usa questa chat per interagire con Chatty, il bot fatto per il nostro sito,
-                        in grado di effettuare tutte le operazioni del sito, come richiedere una demo.
-                    </p>
-                    <p>
-                        Ottieni anche tu la demo gratuita di un chat-box che possa esprimere la voce della tua azienda.
+                        Usa questa chat per interagire con il nostro bot,
+                        il tuo può essere integrato in maniera similare anche sul tuo sito web.
                     </p>
                 </div>
                 <ul id="chat"></ul>
