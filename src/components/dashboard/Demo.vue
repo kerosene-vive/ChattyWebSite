@@ -34,6 +34,7 @@
                                         type="submit"
                                         density="comfortable"
                                         block
+                                        style="background-color: #49246E; color: white"
                                         class="mt-2"
                                         icon="mdi-plus"
                                         :disabled="loading"

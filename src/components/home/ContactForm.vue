@@ -35,7 +35,7 @@
               <div v-if="error != ''" class="error-message">{{ error }}</div>
             </v-card-text>
             <v-card-actions>
-              <v-btn variant="tonal" type="submit" block class="mt-2">Ottieni la tua demo</v-btn>
+              <v-btn variant="tonal" type="submit" block class="mt-2 gradient">Ottieni la tua demo</v-btn>
             </v-card-actions>
           </v-form>
         </v-card>
@@ -50,7 +50,7 @@
               <div v-if="error != ''" class="error-message">{{ error }}</div>
             </v-card-text>
             <v-card-actions>
-              <v-btn class="mt-2" type="submit" variant="tonal">Verifica</v-btn>
+              <v-btn class="mt-2 gradient" type="submit" variant="tonal">Verifica</v-btn>
               <v-spacer></v-spacer>
               <div class="text-caption">
                 Non hai ricevuto nessun codice? <a href="#" @click.prevent="sendOtpAgain">Invia di nuovo</a>
@@ -69,6 +69,7 @@
 <script setup>
   import { ref } from 'vue';
   import utils from '@/utils/utils';
+  import { SHA256 } from 'crypto-js';
   import { useRouter } from 'vue-router';
   import Timeline from '@/components/home/Timeline';
 
@@ -157,7 +158,7 @@
           email: email.value,
           website: site.value,
           description: info.value,
-          password: password.value
+          password: SHA256(password.value).toString()
         }
       });
 

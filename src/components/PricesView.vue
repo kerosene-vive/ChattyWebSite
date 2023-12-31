@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <v-divider></v-divider>
+        <hr style="background-color: white;">
         <v-row class="divider-price">
             <v-col>
                 <h3 block>{{ titleCard }}</h3>
@@ -30,7 +30,7 @@
                                 <v-list density="compact">
                                     <v-list-item v-for="(item, j) in price.features" :key="j">
                                         <template v-slot:prepend v-if="!isMobile">
-                                            <v-icon :icon="item.icon"></v-icon>
+                                            <v-icon :icon="item.icon" style="color: #49246E;"></v-icon>
                                         </template>
                                         <v-list-item-title color="primary">
                                             {{ item.text }}

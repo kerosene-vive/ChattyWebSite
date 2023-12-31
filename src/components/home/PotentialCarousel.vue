@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <v-divider></v-divider>
+        <hr style="background-color: white;">
         <h3 class="divider-text">Potenzialità</h3>
         <v-card elevation="20">
             <v-carousel
@@ -44,3 +44,7 @@
         'Prenotazione di appuntamenti'
     ]);
 </script>
+
+<style scoped>
+
+</style>

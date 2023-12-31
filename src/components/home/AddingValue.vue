@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <v-divider></v-divider>
+        <hr style="background-color: white;">
         <h3 class="divider-text">Valore aggiunto</h3>
     </v-container>
 </template>

@@ -5,7 +5,7 @@
             <v-form @submit.prevent="changePassword">
                 <v-text-field v-model="pass" label="Password" type="password" />
                 <v-text-field v-model="passConfirm" label="Conferma password" type="password" />
-                <v-btn type="submit" block class="mt-2" variant="tonal">Invia</v-btn>
+                <v-btn type="submit" block class="mt-2 gradient" variant="tonal">Invia</v-btn>
             </v-form>
             <br><div class="error-message">{{ error }}</div>
             <div class="text-caption">
