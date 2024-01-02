@@ -1,5 +1,5 @@
 <template>
-    <v-container class="login-container" v-if="status=='Not Ready'">
+    <v-container class="login-container" v-if="status == 'Not Ready' || status == 'Not Verified'">
         <v-sheet width="400" class="mx-auto login-box" elevation="20">
             <h1>Il tuo bot è in fase di preparazione.<br>Ti invieremo una mail appena sarà pronto.</h1>
         </v-sheet>

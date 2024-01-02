@@ -3,7 +3,10 @@
     <v-row>
       <v-col>
         <v-card elevation="20" class="form-container" v-if="botId == ''">
-          <v-card-title style="white-space: normal;">Registrati e richiedi una demo gratuita</v-card-title>
+          <v-card-title style="white-space: normal;">
+            <center><v-avatar image="@/assets/logo.jpeg" size="120"></v-avatar></center>
+            <div>Registrati e richiedi una demo gratuita</div>
+          </v-card-title>
           <v-form fast-fail @submit.prevent="askBot">
             <v-card-text>
               <v-row no-gutters>
@@ -153,13 +156,11 @@
     ) {
       error.value = '';
       const post = utils.postRequest({
-        args: {
-          name: name.value,
-          email: email.value,
-          website: site.value,
-          description: info.value,
-          password: SHA256(password.value).toString()
-        }
+        name: name.value,
+        email: email.value,
+        website: site.value,
+        description: info.value,
+        password: SHA256(password.value).toString()
       });
 
       fetch(`${post.hostname}ask-bot`, post.options)
@@ -183,7 +184,6 @@
   const sendOtpAgain = () => {
     error.value = '';
     const post = utils.postRequest({
-      otp: otp.value,
       bot_id: botId.value
     });
 
