@@ -3,7 +3,9 @@
         <hr style="background-color: white;">
         <v-row class="divider-price">
             <v-col>
-                <h3 block>{{ titleCard }}</h3>
+                <h3 block>
+                    {{ home ? 'Prezzi': 'Per procedere con l\'integrazione scegli un abbonamento' }}
+                </h3>
             </v-col>
             <v-col cols="auto">
                 <v-switch :label="switchFlag ? 'Annuale' : 'Mensile'" v-model="switchFlag" class="switch-price" />
@@ -13,12 +15,16 @@
             <v-row>
                 <v-col v-for="(price, i) in prices" :key="i" cols="12" md="4">
                     <v-item>
-                        <v-card class="d-flex align-center" height="190" elevation="20" @click.prevent="buy(price.name)">
+                        <v-card class="d-flex align-center" height="190" elevation="20">
                             <template v-slot:title>
-                                {{ price.name }}
+                                <v-btn block class="mt-2 gradient" variant="tonal" v-if="!home" @click.prevent="buy(price.name)">
+                                    {{ price.name }}
+                                </v-btn>
+                                <div v-else>{{ price.name }}</div>
                             </template>
                             <template v-slot:subtitle>
                                 <div>
+                                    <br v-if="!home">
                                     {{ switchFlag ? price.value.year : price.value.month }},00
                                     €/{{ switchFlag ? 'year' : 'month' }}
                                 </div>
@@ -44,14 +50,26 @@
             </v-row>
         </v-item-group>
     </v-container>
+    <stripe-checkout
+        ref="checkoutRef"
+        mode="subscription"
+        :pk="publishableKey"
+        :line-items="lineItems"
+        :success-url="successURL"
+        :cancel-url="cancelURL"
+        @loading="v => loading = v"
+    />
 </template>
 
 <script setup>
     import { ref } from 'vue';
     import utils from '@/utils/utils';
+    import { useRoute } from 'vue-router';
+    import { StripeCheckout } from '@vue-stripe/vue-stripe';
 
+    const route = useRoute();
     const switchFlag = ref(true);
-    const { titleCard } = defineProps(['titleCard']);
+    const { home } = defineProps(['home']);
     const { isMobile } = utils.setupMobileUtils();
     const prices = ref([
         {
@@ -60,6 +78,10 @@
                 year: 150,
                 month: 15,
                 yearMonth: "12,50"
+            },
+            stripeIds: {
+                year: "price_1OSNvVAKuqbgBCCYD9Jnc5DX",
+                month: "price_1OSNvVAKuqbgBCCY72AuWkZ"
             },
             features: [
                 {
@@ -82,6 +104,10 @@
                 year: 300,
                 month: 30,
                 yearMonth: "25,00"
+            },
+            stripeIds: {
+                year: "price_1OSNwrAKuqbgBCCYPcfwCL3e",
+                month: "price_1OSNwrAKuqbgBCCYKg3skdBN"
             },
             features: [
                 {
@@ -109,6 +135,10 @@
                 month: 50,
                 yearMonth: "41,66"
             },
+            stripeIds: {
+                year: "price_1OSNzCAKuqbgBCCYL1jm1SUV",
+                month: "price_1OSNzCAKuqbgBCCY5lRXJX5S"
+            },
             features: [
                 {
                     icon: "mdi-numeric-1-circle",
@@ -130,8 +160,20 @@
         }
     ])
 
-    const buy = (packageName) => {
-        alert(packageName)
+    const publishableKey = "pk_test_51OSKyZAKuqbgBCCYqbRsesezlezej2bKJr8AiSVsEDAbSEywRSslF5D6vzZ5JhijsE7TPAhNM9uVp1NIdcuUGhPV00SgrE0vLW";
+    const checkoutRef = ref(null);
+    const loading = ref(false);
+    const lineItems = ref([]);
+    const successURL = ref('');
+    const cancelURL = ref('');
+    const buy = (priceName) => {
+        lineItems.value.push({
+            quantity: 1,
+            price: prices.value.find(price => price.name == priceName).stripeIds[switchFlag.value ? 'year' : 'month']
+        });
+        successURL.value = `${window.location.origin}/dashboard/${route.params.botId}`;
+        cancelURL.value = successURL.value;
+        checkoutRef.value.redirectToCheckout();
     }
 </script>
 
