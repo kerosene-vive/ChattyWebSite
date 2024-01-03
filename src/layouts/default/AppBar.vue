@@ -49,6 +49,10 @@
       path: '/'
     },
     {
+      title: 'Accedi',
+      path: '/login'
+    },
+    {
       title: 'Potenzialità',
       path: '/#potenzialitaSection'
     },
@@ -59,10 +63,6 @@
     {
       title: 'Prezzi',
       path: '/#prezziSection'
-    },
-    {
-      title: 'Accedi',
-      path: '/login'
     }
   ]);
 </script>

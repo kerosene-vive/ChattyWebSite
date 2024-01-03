@@ -43,7 +43,7 @@
                     if (!response.ok)
                         throw new Error(`Errore nella risposta del server: ${response.status} - ${response.statusText}`);
                     return response.json();
-                    })
+                })
                 .then(data => {
                     if (data.status == 'ok')
                         message.value = data.message;

@@ -3,7 +3,9 @@
   <ContactForm />
   <PotentialCarousel id="potenzialitaSection" />
   <FunctionalCard id="funzionamentoSection" />
-  <PricesView id="prezziSection" :home="true" />
+  <div id="prezziSection">
+    <PricesView :home="true" />
+  </div>
   <AddingValue />
   <br>
 </template>

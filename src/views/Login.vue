@@ -59,7 +59,7 @@
                     if (!response.ok)
                         throw new Error(`Errore nella risposta del server: ${response.status} - ${response.statusText}`);
                     return response.json();
-                    })
+                })
                 .then(data => {
                     if (data.status == 'ok')
                         router.push(`/dashboard/${data.bot_id}`);
@@ -85,7 +85,7 @@
                     if (!response.ok)
                         throw new Error(`Errore nella risposta del server: ${response.status} - ${response.statusText}`);
                     return response.json();
-                    })
+                })
                 .then(data => {
                     if (data.status == 'ok')
                         messageChange.value = data.message;
