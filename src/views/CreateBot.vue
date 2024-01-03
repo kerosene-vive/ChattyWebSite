@@ -54,6 +54,7 @@
     ];
 
     const activeBot = () => {
+        error.value = '';
         const boId = route.params.botId;
         var formData = new FormData();
         formData.append('file', img);
@@ -61,7 +62,7 @@
             plan: 1,
             bot_id: boId,
             feedback: note.value,
-            color: userColor.value
+            color: colors[userColor.value].name
         }));
         const hostname = utils.postRequest(null).hostname;
 
