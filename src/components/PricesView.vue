@@ -51,6 +51,7 @@
         </v-item-group>
     </v-container>
     <stripe-checkout
+        v-if="!home"
         ref="checkoutRef"
         mode="subscription"
         :pk="publishableKey"

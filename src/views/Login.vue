@@ -2,7 +2,9 @@
     <v-container class="login-container">
         <v-sheet width="400" class="mx-auto login-box" elevation="20">
             <div v-if="changeFlag">
-                <center><v-avatar image="@/assets/logo.jpeg" size="120"></v-avatar></center>
+                <div class="d-flex align-center justify-space-around">
+                    <v-avatar image="@/assets/logo.jpeg" size="120"></v-avatar>
+                </div>
                 <h3>Effettua il login</h3><br>
                 <v-form @submit.prevent="login">
                     <v-text-field v-model="mail" label="Email" />

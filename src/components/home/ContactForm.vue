@@ -4,7 +4,9 @@
       <v-col>
         <v-card elevation="20" class="form-container" v-if="botId == ''">
           <v-card-title style="white-space: normal;">
-            <center><v-avatar image="@/assets/logo.jpeg" size="120"></v-avatar></center>
+            <div class="d-flex align-center justify-space-around">
+              <v-avatar image="@/assets/logo.jpeg" size="120" />
+            </div>
             <div>Registrati e richiedi una demo gratuita</div>
           </v-card-title>
           <v-form fast-fail @submit.prevent="askBot">

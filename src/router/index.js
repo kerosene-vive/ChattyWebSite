@@ -22,6 +22,11 @@ const routes = [
         component: () => import('@/views/Dashboard.vue'),
       },
       {
+        path: '/create-bot/:botId',
+        name: 'Crea Bot',
+        component: () => import('@/views/CreateBot.vue'),
+      },
+      {
         path: '/change-password/:token',
         name: 'Cambia Password',
         component: () => import('@/views/ChangePassword.vue'),
