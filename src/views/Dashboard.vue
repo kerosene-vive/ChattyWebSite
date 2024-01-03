@@ -26,9 +26,6 @@
     const status = ref('Ready');
     const route = useRoute();
 
-    onMounted(() => {
-        const post = utils.postRequest({
-            bot_id: route.params.botId
-        });
+    onMounted(async () => {
     });
 </script>

@@ -9,7 +9,7 @@
         v-for="(item, i) in items"
         :key="i"
         :value="item"
-        @click="router.push(item.path)"
+        @click="link(item.path)"
       >
         {{ item.title }}
       </v-list-item>
@@ -27,7 +27,7 @@
       v-for="(item, index) in items"
       :key="index"
     >
-      <v-btn variant="text" @click="router.push(item.path)">
+      <v-btn variant="text" @click="link(item.path)">
         {{ item.title }}
       </v-btn>
     </div>
@@ -40,8 +40,12 @@
   import { useRouter } from 'vue-router';
 
   const drawer = ref(null);
-  const router = ref(useRouter());
+  const router = useRouter();
   const { isMobile } = utils.setupMobileUtils();
+
+  const link = (path) => {
+    router.value.push(path);
+  }
 
   const items = ref([
     {
