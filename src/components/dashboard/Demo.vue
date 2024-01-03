@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container v-if="startChat">
         <v-row no-gutters class="chat-box">
             <v-col cols="12">
                 <div class="message-box" ref="scrollContainer">
