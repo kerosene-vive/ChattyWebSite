@@ -27,7 +27,7 @@
     import { useRoute } from 'vue-router';
     import Demo from '@/components/dashboard/Demo';
     import PricesView from '@/components/PricesView';
-    
+
     const status = ref('');
     const route = useRoute();
     const startDemo = ref(false);

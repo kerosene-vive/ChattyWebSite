@@ -50,6 +50,7 @@
             </v-row>
         </v-item-group>
     </v-container>
+    <!--
     <stripe-checkout
         v-if="!home"
         ref="checkoutRef"
@@ -60,6 +61,7 @@
         :cancel-url="cancelURL"
         @loading="v => loading = v"
     />
+    -->
 </template>
 
 <script setup>
