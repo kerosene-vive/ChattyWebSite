@@ -44,7 +44,7 @@
   const { isMobile } = utils.setupMobileUtils();
 
   const link = (path) => {
-    router.value.push(path);
+    router.push(path);
   }
 
   const items = ref([
