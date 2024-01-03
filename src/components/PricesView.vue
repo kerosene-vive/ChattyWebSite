@@ -172,8 +172,8 @@
             quantity: 1,
             price: prices.value.find(price => price.name == priceName).stripeIds[switchFlag.value ? 'year' : 'month']
         });
-        successURL.value = `${window.location.origin}/dashboard/${route.params.botId}`;
-        cancelURL.value = successURL.value;
+        successURL.value = `${window.location.origin}/create-bot/${route.params.botId}`;
+        cancelURL.value = `${window.location.origin}/dashboard/${route.params.botId}`;;
         checkoutRef.value.redirectToCheckout();
     }
 </script>

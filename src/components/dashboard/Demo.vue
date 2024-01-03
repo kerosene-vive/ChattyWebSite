@@ -3,12 +3,11 @@
         <v-row no-gutters class="chat-box">
             <v-col cols="12">
                 <div class="message-box" ref="scrollContainer">
-                    <v-list lines="ten" v-if="flagBot.status == 'Ready'">
+                    <v-list lines="ten" v-if="flagBot.status == 'Ready'" class="demo-message">
                         <v-list-item
                             v-for="(message, i) in messages"
                             :key="i"
                             :title="message.bot ? 'Bot' : 'Utente'"
-                            class="demo-message"
                         >
                             <template v-slot:subtitle>
                                 <div v-html="marked.parseMd(message.message)"></div>

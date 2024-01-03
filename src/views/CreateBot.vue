@@ -2,7 +2,7 @@
     <v-container class="login-container">
         <v-sheet width="400" class="mx-auto login-box" elevation="20">
             <h3>Attiva il tuo Chatty</h3><br>
-            <v-form @submit.prevent="activeBot">
+            <v-form @submit.prevent="activeBot" enctype="multipart/form-data">
                 <v-file-input accept="image/*" v-model="img" label="Carica il tuo logo"></v-file-input>
                 <br><v-row class="d-flex align-center justify-space-around">
                     <v-chip-group v-model="userColor">
@@ -54,6 +54,7 @@
     ];
 
     const activeBot = () => {
+        /** 
         error.value = '';
         const boId = route.params.botId;
         var formData = new FormData();
@@ -68,8 +69,21 @@
 
         fetch(`${hostname}active-bot`, {
             method: 'POST',
-            body: formData
+            body: formData,
+            headers: {
+                'Content-Type': 'application/json'
+            },
         })
+        */
+       
+        const hostname = utils.postRequest(null).hostname;
+        const formData = new FormData();
+         formData.append('file', img.value);
+
+            fetch(`${hostname}upload`, {
+            method: 'POST',
+            body: formData,
+            })
             .then(response => {
                 if (!response.ok)
                     throw new Error(`Errore nella risposta del server: ${response.status} - ${response.statusText}`);
