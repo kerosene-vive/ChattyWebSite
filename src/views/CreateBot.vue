@@ -3,7 +3,7 @@
         <v-sheet width="400" class="mx-auto login-box" elevation="20">
             <h3>Attiva il tuo Chatty</h3><br>
             <v-form @submit.prevent="activeBot" enctype="multipart/form-data">
-                <v-file-input accept="image/*" v-model="img" label="Carica il tuo logo"></v-file-input>
+                <v-file-input accept="image/*" label="Carica il tuo logo"></v-file-input>
                 <br><v-row class="d-flex align-center justify-space-around">
                     <v-chip-group v-model="userColor">
                         <v-chip variant="flat" v-for="(colore, i) in colors" :key="i" :color="colore.color">

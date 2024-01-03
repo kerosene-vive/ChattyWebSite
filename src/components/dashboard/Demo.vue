@@ -1,9 +1,9 @@
 <template>
-    <v-container v-if="startChat">
+    <v-container>
         <v-row no-gutters class="chat-box">
             <v-col cols="12">
                 <div class="message-box" ref="scrollContainer">
-                    <v-list lines="ten" v-if="flagBot.status == 'Ready'" class="demo-message">
+                    <v-list lines="ten"  class="demo-message">
                         <v-list-item
                             v-for="(message, i) in messages"
                             :key="i"
@@ -14,9 +14,6 @@
                             </template>
                         </v-list-item>
                     </v-list>
-                    <div v-else>
-                        {{ flagBot.message }}
-                    </div>
                 </div>
             </v-col>
         </v-row>
@@ -51,7 +48,6 @@
 </template>
 
 <script setup>
-    import utils from '@/utils/utils';
     import marked from '@/chat/marked';
     import sender from '@/chat/sender';
     import { ref, onMounted } from 'vue';
@@ -62,17 +58,12 @@
     const messages = ref([]);
     const route = useRoute();
     const loading = ref(false);
-    const flagBot = ref(false);
     const userMessage = ref('');
     const scrollContainer = ref(null);
 
     onMounted(async () => {
-        botId = route.params.botId;
-        flagBot.value = await utils.tryBot(botId);
-        if (flagBot.value) {
-            loading.value = true;
-            sender.sendMessage(botId, threadId, 'Ciao', addMessageDemo);
-        }
+        loading.value = true;
+        sender.sendMessage(route.params.botId, threadId, 'Ciao', addMessageDemo);
     });
 
     const addMessageDemo = (message, bot = true) => {
@@ -87,7 +78,7 @@
     };
 
     const sendMessageByFormDemo = async () => {
-        if (userMessage.value && flagBot.value.status == 'ok') {
+        if (userMessage.value) {
             addMessageDemo(userMessage.value, false);
             loading.value = true;
             sender.sendMessage(botId, threadId, userMessage.value, addMessageDemo);
@@ -98,7 +89,7 @@
 
 <style scoped>
     .chat-box {
-        height: 45vh;
+        height: 60vh;
         overflow-y: auto;
     }
     .demo-message {

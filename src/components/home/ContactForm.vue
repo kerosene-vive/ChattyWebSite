@@ -23,7 +23,7 @@
               <v-row no-gutters>
                 <v-col cols="12" md="12">
                   <v-textarea 
-                    label="Altre informazioni sulla tua azienda" v-model="info" rows="3"
+                    label="Altre informazioni sulla tua azienda" v-model="info" rows="2"
                     hint="Più informazioni ci fornirai sulla tua azienda, più il tuo Chatty sarà efficente"
                   />
                 </v-col>

@@ -5,16 +5,13 @@
         </v-sheet>
     </v-container>
     <v-container v-if="status == 'Ready'">
-        <div v-if="startDemo">
-            <h1 class="message-box">Usa questa chat per provare la demo del tuo bot</h1>
-            <Demo />
-        </div>
-        <div v-else>
-            <h1 class="message-box">Clicca qui per avviare una demo</h1>
-            <v-btn variant="tonal" type="submit" block class="mt-2 gradient" @click="btnDemo">
-                Ottieni la tua demo
-            </v-btn>
-        </div>
+        <Demo v-if="startDemo" />
+        <v-container v-else  class="message-box">
+            <h1>Clicca qui per avviare una demo</h1><br>
+            <v-btn variant="outlined" type="submit" block class="mt-2 gradient" @click="btnDemo">
+                Prova ora
+            </v-btn><br>
+        </v-container>
         <PricesView :home="false" />
     </v-container>
     <v-container v-if="status == 'Production'">
@@ -31,14 +28,15 @@
     import Demo from '@/components/dashboard/Demo';
     import PricesView from '@/components/PricesView';
     
-    const status = ref('Ready');
+    const status = ref('');
     const route = useRoute();
     const startDemo = ref(false);
 
     onMounted(async () => {
+        status.value = (await utils.tryBot(route.params.botId)).status;
     });
 
-    const btnDemo = () => {
+    const btnDemo = async () => {
         startDemo.value = true;
     };
 </script>
