@@ -40,11 +40,11 @@
   import { useRouter } from 'vue-router';
 
   const drawer = ref(null);
-  const router = useRouter();
+  const router = ref(useRouter());
   const { isMobile } = utils.setupMobileUtils();
 
   const link = (path) => {
-    router.push(path);
+    router.value.push(path);
   }
 
   const items = ref([

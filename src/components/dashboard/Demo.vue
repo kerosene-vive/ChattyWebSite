@@ -3,7 +3,7 @@
         <v-row no-gutters class="chat-box">
             <v-col cols="12">
                 <div class="message-box" ref="scrollContainer">
-                    <v-list lines="ten"  class="demo-message">
+                    <v-list lines="ten" class="demo-message">
                         <v-list-item
                             v-for="(message, i) in messages"
                             :key="i"
